@@ -501,7 +501,7 @@ export default function App() {
                 Kaeyke
               </span>
               <span className="block text-[10px] text-amber-400 font-bold uppercase tracking-widest -mt-1">
-                Authentic Sambal
+                Authentic Sambal by Hidaayah
               </span>
             </div>
           </div>
