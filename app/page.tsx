@@ -3,7 +3,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
   ShoppingBag, Trash2, Plus, Minus, X, Check, 
-  Flame, Star, ShieldCheck, Truck, ChevronRight, ArrowLeft 
+  Flame, Star, ShieldCheck, Truck, ChevronRight, ArrowLeft,
+  Sparkles, ShoppingCart, ArrowRight, ChefHat, Search, RefreshCw, MessageSquare, MapPin 
 } from 'lucide-react';
 
 // ==========================================
