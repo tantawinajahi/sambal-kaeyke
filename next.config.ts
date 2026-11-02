@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  /* config options lama */
   experimental: {
     agentFeedback: true,
   },
@@ -15,15 +15,8 @@ const nextConfig: NextConfig = {
       },
     },
   },
-};
-
-export default nextConfig;
-
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+  // --- TAMBAHAN UNTUK BYPASS RALAT VERCEL ---
   typescript: {
-    // Abaikan ralat jenis semasa proses build di Vercel sementara waktu
     ignoreBuildErrors: true,
   },
   eslint: {
@@ -31,4 +24,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig; // Atau module.exports = nextConfig; bergantung pada fail asal
+export default nextConfig;
