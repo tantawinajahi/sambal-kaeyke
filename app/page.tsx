@@ -2,11 +2,19 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
-  ShoppingCart, Heart, Star, Flame, Check, ShieldCheck, Truck, 
-  Award, ChevronRight, X, Plus, Minus, Search, Filter, ArrowRight,
-  Sparkles, RefreshCw, ChefHat, Instagram, Facebook, Phone, Mail,
-  MapPin, Gift, Tag, ThumbsUp, MessageSquare, AlertCircle
+  ShoppingBag, Trash2, Plus, Minus, X, Check, 
+  Flame, Star, ShieldCheck, Truck, ChevronRight, ArrowLeft 
 } from 'lucide-react';
+
+// ==========================================
+// --- LETAK SUPABASE CLIENT DI SINI ---
+// ==========================================
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// ==========================================
 
 // --- DATA DEFINITIONS ---
 
@@ -179,25 +187,56 @@ const PAIRING_GUIDES = [
   }
 ];
 
+// ==========================================
+// --- STEP 2: TAMBAH INTERFACE DI SINI ---
+// ==========================================
+interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  selectedSize?: string;
+  imageBg?: string;
+  [key: string]: any;
+}
+
+interface Product {
+  id: string;
+  name: string;
+  subtitle?: string;
+  price: number;
+  rating?: number;
+  reviewsCount?: number;
+  heatLevel?: number;
+  heatLabel?: string;
+  weight?: string;
+  description?: string;
+  ingredients?: string;
+  bestPairedWith?: string;
+  badge?: string;
+  imageBg?: string;
+  [key: string]: any;
+}
+
 // --- MAIN APP COMPONENT ---
 
 export default function App() {
   // Navigation & View State
-  const [activeTab, setActiveTab] = useState('home');
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [quickViewProduct, setQuickViewProduct] = useState(null);
-
-  // --- TAMBAHKAN BARIS INI DI SINI ---
-  const [loading, setLoading] = useState(false);
-  // -----------------------------------
+  const [activeTab, setActiveTab] = useState<string>('home');
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  
+  // STEP 3: KEMAS KINI TYPES DI DALAM STATE
+  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [checkoutMessage, setCheckoutMessage] = useState<string | null>(null);
   
   // Cart & E-commerce State
-  const [cart, setCart] = useState([]);
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
-  const [discountCode, setDiscountCode] = useState('');
-  const [discountApplied, setDiscountApplied] = useState(0);
-  const [discountMsg, setDiscountMsg] = useState('');
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState<boolean>(false);
+  const [discountCode, setDiscountCode] = useState<string>('');
+  const [discountApplied, setDiscountApplied] = useState<number>(0);
+  const [discountMsg, setDiscountMsg] = useState<string>('');
   
   // Notification Toast State
   const [toast, setToast] = useState(null);
